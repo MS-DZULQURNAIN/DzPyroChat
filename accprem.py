@@ -3,30 +3,29 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForbidden
 
-
-
-
+FSUB = "accdzuserbot"
 
 @Client.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(bot: Client, msg: Message):
-    if not MUST_JOIN:  
+    if not FSUB:  
         return
     try:
         try:
-            await bot.get_chat_member(MUST_JOIN, msg.from_user.id)
+            await bot.get_chat_member(FSUB, msg.from_user.id)
         except UserNotParticipant:
-            if MUST_JOIN.isalpha():
-                link = "https://t.me/" + MUST_JOIN
+            if FSUB.isalpha():
+                link = "https://t.me/" + FSUB
             else:
-                chat_info = await bot.get_chat(MUST_JOIN)
+                chat_info = await bot.get_chat(FSUB)
                 link = chat_info.invite_link
             try:
                 await msg.reply(
-                    f"Kamu harus join channel dibawah ini sebelum menggunakan saya. Setelah join coba lagi klik /start",
+                    f"TEXT FSUB",
                     disable_web_page_preview=True,
                     reply_markup=InlineKeyboardMarkup([
-                        [InlineKeyboardButton("JOIN CHANNEL", url="https://t.me/stories_zulll")],
-                        [InlineKeyboardButton("JOIN CHANNEL", url=link)]
+                        [InlineKeyboardButton("ADMIN 👤", url="https://t.me/MSDZULQRNN")],
+                        [InlineKeyboardButton("CHANNEL", url="https://t.me/MSPR0JECT"),
+                         InlineKeyboardButton("SUPPORT", url="https://t.me/envSample")],
                     ])
                 )
                 await msg.stop_propagation()
