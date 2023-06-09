@@ -15,7 +15,7 @@ import pyrogram
 from pyrogram import __version__ as pyrover
 from pyrogram import filters, idle
 from pyrogram.errors import FloodWait
-from pyrogram.types import Message
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 import config
 import mongo
@@ -42,8 +42,18 @@ async def init():
     async def start_command(_, message: Message):
         if await mongo.is_banned_user(message.from_user.id):
             return
+        reply_markup = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(text="BUAT DZ USERBOT🔥", data="buat"), 
+                ],
+                [
+                    InlineKeyboardButton(text="Tutorial", url=""),
+                    InlineKeyboardButton(text="Support", url=""),
+                ]
+             ])
         await mongo.add_served_user(message.from_user.id)
-        await message.reply_text(config.PRIVATE_START_MESSAGE)
+        await message.reply_text(config.PRIVATE_START_MESSAGE, reply_markup=reply_markup,)
 
     @app.on_message(
         filters.command("mode") & filters.user(SUDO_USERS)
