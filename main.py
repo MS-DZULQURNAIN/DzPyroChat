@@ -45,7 +45,7 @@ async def init():
         reply_markup = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="BUAT DZ USERBOT🔥", data="buat"), 
+                    InlineKeyboardButton(text="BUAT DZ USERBOT🔥", callback_data=""), 
                 ],
                 [
                     InlineKeyboardButton(text="Tutorial", url=""),
@@ -53,7 +53,7 @@ async def init():
                 ]
              ])
         await mongo.add_served_user(message.from_user.id)
-        await message.reply_text(config.PRIVATE_START_MESSAGE, reply_markup=reply_markup,)
+        await message.reply_text(text="udah nih", reply_markup=reply_markup)
 
     @app.on_message(
         filters.command("mode") & filters.user(SUDO_USERS)
